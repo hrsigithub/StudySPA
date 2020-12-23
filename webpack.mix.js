@@ -15,3 +15,17 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+
+// ホットリロード
+// mix.browserSync({
+//     files: [
+//         "resources/views/**/*.blade.php",
+//         "public/**/*.*"
+//     ],
+//     open: false,
+//     proxy: {
+//         target: "http://127.0.0.1:8000"
+//     },
+//     https: false,
+//     reloadOnRestart: true
+// });
