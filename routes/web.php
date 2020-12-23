@@ -18,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
+
+// 会員登録
+//Route::post('/register', 'Auth\RegisterController@register')->name('register');
+
+//Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
