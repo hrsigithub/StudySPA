@@ -10,10 +10,11 @@ import App from './App.vue'
 
 const app = createApp({
     components: { App },
-    template: '<App />'
+    template: '<App />',
     // template: '<h1>Hello world</h1>'
-})
+})    
 
 app.use(router)
 
 .mount('#app')
+                                                         
