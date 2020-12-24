@@ -61,5 +61,12 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('web') // ★ 'api' → 'web' に変更
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
     
 }
