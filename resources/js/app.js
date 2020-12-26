@@ -1,20 +1,30 @@
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
 require('./bootstrap');
 
-import { createApp } from 'vue/dist/vue.esm-bundler.js';
-window.createApp = createApp;
 
-import router from './router'
+// 
+window.Vue = require('vue');
 
+// ルーティングの定義をインポートする
+//import router from './common/router'
+
+//import store from './store'
+
+// ルートコンポーネントをインポートする
 import App from './App.vue'
-//window.HelloComponent = require('./components/Hello.vue').default;
 
-const app = createApp({
-    components: { App },
-    template: '<App />',
-    // template: '<h1>Hello world</h1>'
-})    
 
-app.use(router)
-
-.mount('#app')
-                                                         
+new Vue({
+  el: '#app',
+//  router,
+//  store,
+  // vuetify,
+  components: { App },
+  template: '<App />',
+  // template: '<h1>Hello world</h1>'
+})

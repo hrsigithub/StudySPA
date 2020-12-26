@@ -24,5 +24,10 @@ Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// ログイン
+Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login')->name('login');
+
+// ログアウト
+Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
