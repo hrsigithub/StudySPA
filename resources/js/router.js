@@ -1,24 +1,30 @@
-import { createApp } from 'vue/dist/vue.esm-bundler.js';
-import { createRouter, createWebHistory } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 // ページコンポーネントをインポートする
 import PhotoList from './pages/PhotoList.vue'
 import Login from './pages/Login.vue'
 
-const routes = [
-    {
-      path: '/',
-      component: PhotoList
-    },
-    {
-      path: '/login',
-      component: Login
-    }
-  ]
+// VueRouterプラグインを使用する
+// これによって<RouterView />コンポーネントなどを使うことができる
+Vue.use(VueRouter)
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes: routes,
+// パスとコンポーネントのマッピング
+const routes = [
+  {
+    path: '/',
+    component: PhotoList
+  },
+  {
+    path: '/login',
+    component: Login
+  }
+]
+
+// VueRouterインスタンスを作成する
+const router = new VueRouter({
+  mode: 'history', // ★ 追加
+  routes
 })
 
 export default router

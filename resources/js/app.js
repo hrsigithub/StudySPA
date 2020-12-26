@@ -11,9 +11,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 // ルーティングの定義をインポートする
-//import router from './common/router'
+import router from './router'
 
-//import store from './store'
+import store from './store'
 
 // ルートコンポーネントをインポートする
 import App from './App.vue'
@@ -21,8 +21,8 @@ import App from './App.vue'
 
 new Vue({
   el: '#app',
-//  router,
-//  store,
+ router,
+ store,
   // vuetify,
   components: { App },
   template: '<App />',

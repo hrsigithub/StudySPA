@@ -15,16 +15,17 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
 
     ;
+
 // ホットリロード
-// mix.browserSync({
-//     files: [
-//         "resources/views/**/*.blade.php",
-//         "public/**/*.*"
-//     ],
-//     open: false,
-//     proxy: {
-//         target: "http://127.0.0.1:8000"
-//     },
-//     https: false,
-//     reloadOnRestart: true
-// });
+mix.browserSync({
+    files: [
+        "resources/views/**/*.blade.php",
+        "public/**/*.*"
+    ],
+    open: true,
+    proxy: {
+        target: "http://127.0.0.1:8000"
+    },
+    https: false,
+    reloadOnRestart: true
+});
