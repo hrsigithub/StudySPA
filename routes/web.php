@@ -17,6 +17,3 @@ Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
 
 
 
-
-// ログアウト
-Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');

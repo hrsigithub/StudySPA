@@ -19,7 +19,7 @@ class LoginApiTest extends TestCase
 
         // テストユーザー作成
         // $this->user = factory(User::class)->create();
-        $this->user = User::factory(1)->create();
+        $this->user = User::factory()->create();
     }
 
     /**
@@ -27,18 +27,15 @@ class LoginApiTest extends TestCase
      */
     public function should_登録済みのユーザーを認証して返却する()
     {
-//        dd($this->user->first()->email);
-
         $response = $this->json('POST', route('login'), [
-            'email' => $this->user->first()->email,
+            'email' => $this->user->email,
             'password' => 'password',
         ]);
 
         $response
             ->assertStatus(200)
-        //    ->assertJson(['name' => $this->user->name])
-        ;
+            ->assertJson(['name' => $this->user->name]);
 
-        //$this->assertAuthenticatedAs($this->user);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

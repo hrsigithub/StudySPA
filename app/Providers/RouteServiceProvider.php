@@ -39,7 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::prefix('api')
-                ->middleware('api')
+                // ->middleware('api')
+                ->middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
@@ -60,13 +61,5 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
-
-    // protected function mapApiRoutes()
-    // {
-    //     Route::prefix('api')
-    //         ->middleware('web') // ★ 'api' → 'web' に変更
-    //         ->namespace($this->namespace)
-    //         ->group(base_path('routes/api.php'));
-    // }
     
 }
