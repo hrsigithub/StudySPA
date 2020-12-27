@@ -19,12 +19,16 @@ import store from './store'
 import App from './App.vue'
 
 
-new Vue({
-  el: '#app',
- router,
- store,
-  // vuetify,
-  components: { App },
-  template: '<App />',
-  // template: '<h1>Hello world</h1>'
-})
+const createApp = async () => {
+  await store.dispatch('auth/currentUser')
+
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App />'
+  })
+}
+
+createApp()

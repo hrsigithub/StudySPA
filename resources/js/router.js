@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 import PhotoList from './pages/PhotoList.vue'
 import Login from './pages/Login.vue'
 
+import store from './store' 
+
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
 Vue.use(VueRouter)
@@ -17,7 +19,21 @@ const routes = [
   },
   {
     path: '/login',
-    component: Login
+    component: Login,
+
+    // 以下、起動していない？ログイン後に/loginで遷移できる。
+    // 課題は、ログインされている状態でもログインページにアクセスできる点
+    beforeEnter (to, from, next) { //定義されたルートにアクセスされてページコンポーネントが切り替わる直前に呼び出される関数
+      if (store.getters['auth/check']) {
+        console.log('beforeEnter1:', store.getters['auth/check'])
+        // console.log('beforeEnter1:', store.getters['auth/username'])
+        next('/') // ログインしている場合
+      } else {
+        console.log('beforeEnter2:', store.getters['auth/check'])
+        // console.log('beforeEnter2:', store.getters['auth/username'])
+        next()
+      }
+    }
   }
 ]
 
