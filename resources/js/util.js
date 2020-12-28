@@ -2,6 +2,9 @@ export const OK = 200
 export const CREATED = 201
 export const INTERNAL_SERVER_ERROR = 500
 
+// Laravel はバリデーションエラーでは 422 をレスポンスします。
+export const UNPROCESSABLE_ENTITY = 422
+
 
 export function getCookieValue (searchKey) {
     if (typeof searchKey === 'undefined') {
