@@ -41,8 +41,10 @@ class PhotoController extends Controller
         // Storage::cloud()
         //     ->putFileAs('', $request->photo, $photo->filename, 'public');
 
-        Storage::disk('s3')->putFileAs('', $request->photo, $photo->filename, 'public');
+
+//        Storage::disk('s3')->putFile('', $request->photo, $photo->filename, 'public');
             
+        //dd($photo->filename);
 
         // データベースエラー時にファイル削除を行うため
         // トランザクションを利用する
@@ -57,7 +59,7 @@ class PhotoController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             // DBとの不整合を避けるためアップロードしたファイルを削除
-            Storage::cloud()->delete($photo->filename);
+            Storage::disk('s3')->delete($photo->filename);
             throw $exception;
         }
 
