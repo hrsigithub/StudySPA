@@ -34,6 +34,8 @@ class Photo extends Model
         'id', 'owner', 'url',
     ];
 
+    protected $perPage = 1;
+
  
      public function __construct(array $attributes = [])
      {
@@ -89,6 +91,7 @@ class Photo extends Model
      */
     public function getUrlAttribute()
     {
-        return Storage::disk('public')->path($this->attributes['filename']);
+//        return Storage::disk('public')->path($this->attributes['filename']);
+        return Storage::disk('public')->url($this->attributes['filename']);
     }
 }
