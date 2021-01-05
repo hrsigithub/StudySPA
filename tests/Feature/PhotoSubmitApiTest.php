@@ -38,22 +38,18 @@ class PhotoSubmitApiTest extends TestCase
                 'photo' => UploadedFile::fake()->image('photo.jpg'),
             ]);
 
-            
+
         // レスポンスが201(CREATED)であること
         $response->assertStatus(201);
 
         $photo = Photo::first();
 
-       // dd($photo);
-
         // // 写真のIDが12桁のランダムな文字列であること
         $this->assertMatchesRegularExpression('/^[0-9a-zA-Z-_]{12}$/', $photo->id);
 
         // // DBに挿入されたファイル名のファイルがストレージに保存されていること
-//        Storage::s3()->assertExists($photo->filename);
         Storage::disk('s3')->exists($photo->filename);
 
-        //$missing = Storage::disk('s3')->missing('file.jpg');
     }
 
     /**
@@ -75,7 +71,7 @@ class PhotoSubmitApiTest extends TestCase
         $response->assertStatus(500);
 
         // ストレージにファイルが保存されていないこと
-        $a = Storage::cloud()->files();
+        $a = Storage::disk('s3')->files();
         $this->assertEquals(0, count(Storage::cloud()->files()));
     }
 
@@ -85,9 +81,10 @@ class PhotoSubmitApiTest extends TestCase
     public function should_ファイル保存エラーの場合はDBへの挿入はしない()
     {
         // ストレージをモックして保存時にエラーを起こさせる
-        Storage::shouldReceive('s3')
-            ->once()
-            ->andReturnNull();
+        Storage::shouldReceive('public')
+            // ->once()
+            // ->andReturnNull()
+            ;
 
         $response = $this->actingAs($this->user)
             ->json('POST', route('photo.create'), [

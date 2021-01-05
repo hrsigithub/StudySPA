@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
+    use HasFactory;
+
 
      /** プライマリキーの型 */
      protected $keyType = 'string';
@@ -36,11 +38,11 @@ class Photo extends Model
 
     protected $perPage = 1;
 
- 
+
      public function __construct(array $attributes = [])
      {
          parent::__construct($attributes);
- 
+
          if (! Arr::get($this->attributes, 'id')) {
              $this->setId();
          }

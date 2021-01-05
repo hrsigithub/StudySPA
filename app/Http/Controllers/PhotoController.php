@@ -16,9 +16,20 @@ class PhotoController extends Controller
     public function __construct()
     {
         // 認証が必要
-//        $this->middleware('auth');
-        // 認証が必要
-        $this->middleware('auth')->except(['index', 'download']);
+        // 写真詳細取得 API も認証なしでアクセス
+        $this->middleware('auth')->except(['index', 'download', 'show']);
+    }
+
+    /**
+     * 写真詳細
+     * @param string $id
+     * @return Photo
+     */
+    public function show(string $id)
+    {
+        $photo = Photo::where('id', $id)->with(['owner'])->first();
+
+        return $photo ?? abort(404);
     }
 
     /**
@@ -61,7 +72,7 @@ class PhotoController extends Controller
 
         // ローカルへ保存
        Storage::disk('public')->putFileAs('', $request->photo, $photo->filename);
-            
+
 
         // データベースエラー時にファイル削除を行うため
         // トランザクションを利用する
